@@ -18,7 +18,7 @@ class IteratorDirectives
     /**
      *
      * @param  \Illuminate\Filesystem\Filesystem $filesystem
-     * @param  \Illuminate\Config\Repository $config
+     * @param  \Illuminate\Config\Repository     $config
      *
      * @return array
      */

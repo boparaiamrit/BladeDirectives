@@ -13,10 +13,8 @@
 
 namespace Wilsonpinto\Blade\Tests;
 
-use Illuminate\Contracts\Filesystem\FileNotFoundException;
-use Wilsonpinto\Blade\Directives\AssignmentDirectives;
-use Wilsonpinto\Blade\Directives\IteratorDirectives;
 use Jenssegers\Blade\Blade;
+use Wilsonpinto\Blade\Directives\AssignmentDirectives;
 
 class BladeDirectivesTest extends \PHPUnit_Framework_TestCase
 {
@@ -25,7 +23,7 @@ class BladeDirectivesTest extends \PHPUnit_Framework_TestCase
      *
      * @var \Jenssegers\Blade\Blade
      */
-	private $blade;
+    private $blade;
 
     /**
      * Cache folder path
@@ -41,13 +39,13 @@ class BladeDirectivesTest extends \PHPUnit_Framework_TestCase
      */
     private $viewsPath = 'tests/views';
 
-	public function setUp()
+    public function setUp()
     {
         $this->blade = new Blade($this->viewsPath, $this->cachePath);
-        
+
         $bladeCompiler = $this->blade->getEngineResolver()->resolve('blade')->getCompiler();
 
-        $directives = require('__DIR__'.'/../src/directives.php');
+        $directives = require('__DIR__' . '/../src/directives.php');
 
         AssignmentDirectives::register($bladeCompiler, $directives);
     }
@@ -56,7 +54,7 @@ class BladeDirectivesTest extends \PHPUnit_Framework_TestCase
     {
         $this->clearCache($this->cachePath);
     }
-    
+
     /**
      * Test set directive
      *
@@ -86,23 +84,23 @@ class BladeDirectivesTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertBladeTemplates('implode');
     }
-    
+
 
     /*
     |--------------------------------------------------------------------------
     | Helpers
     |--------------------------------------------------------------------------
-    */ 
-   
-   /**
-    * Assert blade templates with html output
-    * 
-    * @param  string $template
-    * 
-    * @return void
     */
-   private function assertBladeTemplates($template, $minify = true)
-   {    
+
+    /**
+     * Assert blade templates with html output
+     *
+     * @param  string $template
+     *
+     * @return void
+     */
+    private function assertBladeTemplates($template, $minify = true)
+    {
         $output = $this->blade->render($template);
 
         $this->assertEquals(
@@ -110,7 +108,7 @@ class BladeDirectivesTest extends \PHPUnit_Framework_TestCase
             $minify == true ? $this->minify($this->read($template)) : $this->read($template)
         );
     }
-   
+
     /**
      * Html Writer on output folder
      *
@@ -121,7 +119,7 @@ class BladeDirectivesTest extends \PHPUnit_Framework_TestCase
      */
     private function write($output, $file)
     {
-        $file_path = __DIR__.'/output/'.$file.'.html';
+        $file_path = __DIR__ . '/output/' . $file . '.html';
 
         file_put_contents($file_path, $output);
     }
@@ -135,25 +133,25 @@ class BladeDirectivesTest extends \PHPUnit_Framework_TestCase
      */
     private function read($file)
     {
-        $file_path = __DIR__.'/output/'.$file.'.html';
+        $file_path = __DIR__ . '/output/' . $file . '.html';
 
         return file_get_contents($file_path);
     }
 
     /**
      * Minify HTML output
-     * 
+     *
      * @param  string $html
-     * 
+     *
      * @return string
      */
     private function minify($html)
     {
-        $search = [ '/\>[^\S ]+/s', '/[^\S ]+\</s', '/(\s)+/s' ];
+        $search = ['/\>[^\S ]+/s', '/[^\S ]+\</s', '/(\s)+/s'];
 
-        $replace = [ '>', '<', '\\1'];
+        $replace = ['>', '<', '\\1'];
 
-        if (preg_match("/\<html/i",$html) == 1 && preg_match("/\<\/html\>/i",$html) == 1) {
+        if (preg_match("/\<html/i", $html) == 1 && preg_match("/\<\/html\>/i", $html) == 1) {
             $html = preg_replace($search, $replace, $html);
         }
 
@@ -162,17 +160,17 @@ class BladeDirectivesTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Clear cached views
-     * 
+     *
      * @param  string $cachePath The cache path
-     * 
+     *
      * @return void
      */
     private function clearCache($cachePath)
     {
-        $fileToDelete = glob($cachePath.'/*');
+        $fileToDelete = glob($cachePath . '/*');
 
-        foreach($fileToDelete as $file){ 
-            if(is_file($file)){
+        foreach ($fileToDelete as $file) {
+            if (is_file($file)) {
                 unlink($file);
             }
         }

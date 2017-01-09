@@ -13,7 +13,6 @@
 
 namespace Wilsonpinto\Blade;
 
-use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
 use Wilsonpinto\Blade\Directives\AssignmentDirectives;
 use Wilsonpinto\Blade\Directives\IteratorDirectives;

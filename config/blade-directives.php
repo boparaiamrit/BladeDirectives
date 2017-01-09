@@ -9,9 +9,9 @@ return [
     |
     | custom your our own directives using proper handler
     |
-    */    	 
+    */
     'directives' => [
-        'datetime'   => function($expression) {
+        'datetime' => function ($expression) {
             return "<?php echo $expression->format('m/d/Y H:i'); ?>";
         }
     ],
@@ -24,6 +24,6 @@ return [
     | exclude directives
     |
     */
-    'exclude' => []
-    
+    'exclude'    => []
+
 ];

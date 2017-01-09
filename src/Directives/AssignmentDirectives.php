@@ -19,7 +19,7 @@ class AssignmentDirectives
      * Register custom blade directives.
      *
      * @param  \Illuminate\View\Compilers\BladeCompiler $blade
-     * @param  array $directives
+     * @param  array                                    $directives
      *
      * @return void
      */
